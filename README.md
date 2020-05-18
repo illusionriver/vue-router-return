@@ -2,7 +2,7 @@
 
 > A Vue component to router return page
 
-## Build Setup
+## 插件添加卸载 Plugin Setup
 
 ``` bash
 # install dependencies
