@@ -13,11 +13,13 @@ npm uninstall vue-router-return
 
 ```
 
-## 参数配置
+## 参数配置 Parameter configuration
+
 **pageReturnName**：页面名称<br>
 **pageReturnName**：page name
 
-## 实例
+## 实例 The instance
+
 首先在项目的入口文件（main.js）中引入<br>
 First, import plugin with main.js.
 ``` 
