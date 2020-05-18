@@ -1,37 +1,49 @@
-## Welcome to GitHub Pages
+# vue-router-return
 
-You can use the [editor on GitHub](https://github.com/illusionriver/vue-router-return/edit/master/index.md) to maintain and preview the content for your website in Markdown files.
+> A Vue component to router return page
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+## Build Setup
 
-### Markdown
+``` bash
+# install dependencies
+npm install vue-router-return
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+# uninstall dependencies
+npm uninstall vue-router-return
 
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+## 参数配置
+**pageReturnName**：页面名称<br>
+**pageReturnName**：page name
 
-### Jekyll Themes
+## 实例
+首先在项目的入口文件（main.js）中引入<br>
+First, import plugin with main.js.
+``` 
+import vueRouterReturn from 'vue-router-return'
+Vue.use(vueRouterReturn) 
+```
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/illusionriver/vue-router-return/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+1、在激活当前页面时，当前前页面增加到路由数组中<br>
+1, When actived page, put the current page into router array.
+``` 
+vueRouterReturn.addRouter('inquiry');
+```
+2、当点击返回上一页面时，跳转页面之后的页面名称从路由数组中删除<br>
+2, When click return button, the page after the jump page will be deleted from the route array.
+```
+      goback() {
+        //this.pageReturnName 需要返回的页面Name，不存在则返回上一级页面
+        if (this.pageReturnName) {
+          //当前返回页面是否存在，存在则删除之后面的路由数组页面并跳转；如果存在，但不为-1，起始页面，不操作
+          if (vueRouterReturn.findRouterName(this.pageReturnName) !== -1) {
+            this.$router.go(-vueRouterReturn.findRouterName(this.pageReturnName));
+            vueRouterReturn.removeRouter(this.pageReturnName);
+          }
+        } else {
+          this.$router.go(-1);
+        }
 
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+      }
+```
